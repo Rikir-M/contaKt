@@ -12,9 +12,9 @@ const ContactTable = () => {
   };
   return (
     <div>
-      <div className=" overflow-x-auto lg:overflow-x-visible  sm:rounded-lg ">
+      <div className=" overflow-x-hidden md:overflow-x-visible  sm:rounded-lg ">
         <table className="w-full text-sm text-left">
-          <thead className="text-xs text-black uppercase bg-gray-200">
+          <thead className="text-xs text-black uppercase bg-gray-200 hidden lg:table-row-group">
             <tr>
               <th scope="col" className="px-6 py-3">
                 Name
@@ -34,12 +34,12 @@ const ContactTable = () => {
             </tr>
           </thead>
           <tbody className="">
-            <tr className="bg-white border-b text-black">
+            <tr className="bg-white border-b text-black hidden lg:table-row ">
               <td
                 scope="row"
-                className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap"
+                className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap "
               >
-                <div className="flex items-center gap-3">
+                <div className="flex items-center  gap-3">
                   <img
                     className="w-10 h-10 object-cover rounded-full"
                     src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
@@ -48,7 +48,9 @@ const ContactTable = () => {
                   <span className="text-black">Heather</span>
                 </div>
               </td>
-              <td className="px-6 py-4">heather@gmail.com</td>
+              <td className="px-6 py-4 ">
+                heather@gmail.com
+              </td>
               <td className="px-6 py-4">09100200300</td>
               <td className="px-6 py-4">August 31 2021</td>
               <td className="px-6 py-4 ">
@@ -60,6 +62,23 @@ const ContactTable = () => {
                   <HiOutlineDotsHorizontal />
                 </a>
               </td>
+            </tr>
+            <tr className="bg-white border-b text-black lg:hidden">
+              <td
+                scope="row"
+                colSpan={4}
+                className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap "
+              >
+                <div className="flex items-center   gap-3">
+                  <img
+                    className="w-10 h-10 object-cover rounded-full"
+                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
+                    alt=""
+                  />
+                  <span className="text-black">Heather</span>
+                </div>
+              </td>
+      
             </tr>
             {clicked && (
               <tr className="relative">
@@ -97,12 +116,12 @@ const ContactTable = () => {
                 </td>
               </tr>
             )}
-            <tr className="bg-white border-b text-black">
+          <tr className="bg-white border-b text-black hidden lg:table-row ">
               <td
                 scope="row"
-                className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap"
+                className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap "
               >
-                <div className="flex items-center gap-3">
+                <div className="flex items-center  gap-3">
                   <img
                     className="w-10 h-10 object-cover rounded-full"
                     src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
@@ -111,7 +130,9 @@ const ContactTable = () => {
                   <span className="text-black">Heather</span>
                 </div>
               </td>
-              <td className="px-6 py-4">heather@gmail.com</td>
+              <td className="px-6 py-4 ">
+                heather@gmail.com
+              </td>
               <td className="px-6 py-4">09100200300</td>
               <td className="px-6 py-4">August 31 2021</td>
               <td className="px-6 py-4 ">
@@ -124,9 +145,26 @@ const ContactTable = () => {
                 </a>
               </td>
             </tr>
+            <tr className="bg-white border-b text-black lg:hidden">
+              <td
+                scope="row"
+                colSpan={4}
+                className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap "
+              >
+                <div className="flex items-center   gap-3">
+                  <img
+                    className="w-10 h-10 object-cover rounded-full"
+                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
+                    alt=""
+                  />
+                  <span className="text-black">Heather</span>
+                </div>
+              </td>
+      
+            </tr>
             {clicked && (
               <tr className="relative">
-                <td colSpan="5" className="px-6 py-4">
+                <td colSpan="3" className="px-6 py-4">
                   <div className="absolute top-[-20px] right-0">
                     <table className="bg-white border border-gray-200 flex flex-col gap-1 cursor-pointer">
                       <tbody>
