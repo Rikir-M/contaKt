@@ -4,8 +4,10 @@ import { FiPlus } from "react-icons/fi";
 import { RiContactsLine } from "react-icons/ri";
 import { AiOutlineHeart } from "react-icons/ai";
 import ContactTable from "./ContactTable";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
+  const nav = useNavigate()
   return (
     <div>
       <aside
@@ -14,8 +16,8 @@ const Sidebar = () => {
         aria-label="Sidebar"
       >
         <div className="h-full rounded-r-xl px-3 py-4 overflow-y-auto bg-primary dark:bg-gray-800 mt-16 text-white">
-          <ul className="space-y-4 font-medium ">
-            <li>
+          <ul className="space-y-4 font-medium select-none">
+            <li onClick={() => nav('/create')}>
               <a
                 href="#"
                 className="flex items-center p-2  rounded-lg dark:text-white transition-all duration-200 hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700"
@@ -26,7 +28,7 @@ const Sidebar = () => {
                 </span>
               </a>
             </li>
-            <li className="hover:text-black transition-all duration-200 ">
+            <li onClick={() => nav('/')} className="hover:text-black transition-all duration-200 ">
               <a
                 href="#"
                 className="flex items-center p-2  rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
@@ -40,7 +42,7 @@ const Sidebar = () => {
                 </div>
               </a>
             </li>
-            <li>
+            <li onClick={() => nav('/favorite')}>
               <a
                 href="#"
                 className="flex items-center p-2  rounded-lg dark:text-white hover:text-black transition-all duration-200 hover:bg-gray-100 dark:hover:bg-gray-700"
@@ -54,9 +56,7 @@ const Sidebar = () => {
           </ul>
         </div>
       </aside>
-      <div className="px-4 ml-0 md:ml-64">
-        <ContactTable />
-      </div>
+ 
     </div>
   );
 };

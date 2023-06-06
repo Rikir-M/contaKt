@@ -5,8 +5,10 @@ import { FcBusinessContact } from "react-icons/fc";
 import { FiPlus } from "react-icons/fi";
 import { RiContactsLine } from "react-icons/ri";
 import { AiOutlineHeart } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const nav = useNavigate()
   return (
     <div>
       <nav className="bg-gray-200 border-gray-200 dark:bg-gray-900">
@@ -125,10 +127,10 @@ const Navbar = () => {
               />
             </div>
             <ul className="flex flex-col overflow-hidden visible md:invisible bg-primary p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-              <li>
+              <li onClick={() => nav('/create')}>
                 <a
                   href="#"
-                  className="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  className="block py-2 pl-3 pr-4 text-white hover:text-primary rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   <span className="flex items-center gap-4 ml-3 whitespace-nowrap">
                     <FiPlus />
@@ -136,10 +138,10 @@ const Navbar = () => {
                   </span>
                 </a>
               </li>
-              <li>
+              <li onClick={() => nav('/')}>
                 <a
                   href="#"
-                  className="flex items-center gap-2 py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  className="flex items-center gap-2 py-2 pl-3 pr-4 text-white hover:text-primary  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   <span className="flex items-center gap-4 ml-3 whitespace-nowrap">
                     <RiContactsLine />
@@ -150,10 +152,10 @@ const Navbar = () => {
                   </div>
                 </a>
               </li>
-              <li>
+              <li onClick={() => nav('/favorite')}>
                 <a
                   href="#"
-                  className="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  className="block py-2 pl-3 pr-4 text-white hover:text-primary  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   <span className="flex items-center gap-4 ml-3 whitespace-nowrap">
                     <AiOutlineHeart />

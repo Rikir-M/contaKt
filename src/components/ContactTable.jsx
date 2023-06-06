@@ -4,9 +4,11 @@ import { BiPencil } from "react-icons/bi";
 import { LuTrash } from "react-icons/lu";
 import { RiUserHeartLine } from "react-icons/ri";
 import {BsFillPersonFill} from 'react-icons/bs'
+import { useNavigate } from "react-router-dom";
 
 const ContactTable = () => {
   const [clicked, setClicked] = useState(false);
+  const nav = useNavigate()
   const clickHandler = () => {
     setClicked(!clicked);
   };
@@ -14,7 +16,7 @@ const ContactTable = () => {
     <div>
       <div className=" overflow-x-hidden md:overflow-x-visible  sm:rounded-lg ">
         <table className="w-full text-sm text-left">
-          <thead className="text-xs text-black uppercase bg-gray-200 hidden lg:table-row-group">
+          <thead className="text-xs text-black uppercase bg-gray-200  hidden lg:table-row-group">
             <tr>
               <th scope="col" className="px-6 py-3">
                 Name
@@ -87,7 +89,7 @@ const ContactTable = () => {
                             <p>Add to Favorite</p>
                           </td>
                         </tr>
-                        <tr className="flex items-center gap-3 hover:bg-gray-100 px-3 py-2">
+                        <tr onClick={() => nav('/edit')} className="flex items-center gap-3 hover:bg-gray-100 px-3 py-2">
                           <td>
                             <BiPencil className="text-2xl" />
                           </td>
