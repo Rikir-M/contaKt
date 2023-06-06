@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { CgProfile } from "react-icons/cg";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { BiPencil } from "react-icons/bi";
 import { LuTrash } from "react-icons/lu";
 import { RiUserHeartLine } from "react-icons/ri";
+import {BsFillPersonFill} from 'react-icons/bs'
 
 const ContactTable = () => {
   const [clicked, setClicked] = useState(false);
@@ -40,11 +40,7 @@ const ContactTable = () => {
                 className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap "
               >
                 <div className="flex items-center  gap-3">
-                  <img
-                    className="w-10 h-10 object-cover rounded-full"
-                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
-                    alt=""
-                  />
+                  <div className="text-white bg-primary p-2 rounded-full"><BsFillPersonFill className="text-2xl"/></div>
                   <span className="text-black">Heather</span>
                 </div>
               </td>
@@ -63,18 +59,15 @@ const ContactTable = () => {
                 </a>
               </td>
             </tr>
-            <tr className="bg-white border-b text-black lg:hidden">
+            <tr className="bg-white border-b text-black lg:hidden ">
               <td
                 scope="row"
                 colSpan={4}
-                className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap "
+                className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap w-full"
               >
                 <div className="flex items-center   gap-3">
-                  <img
-                    className="w-10 h-10 object-cover rounded-full"
-                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
-                    alt=""
-                  />
+                <div className="text-white bg-primary p-2 rounded-full"><BsFillPersonFill className="text-2xl"/></div>
+
                   <span className="text-black">Heather</span>
                 </div>
               </td>
@@ -122,11 +115,7 @@ const ContactTable = () => {
                 className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap "
               >
                 <div className="flex items-center  gap-3">
-                  <img
-                    className="w-10 h-10 object-cover rounded-full"
-                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
-                    alt=""
-                  />
+                  <div className="text-white bg-primary p-2 rounded-full"><BsFillPersonFill className="text-2xl"/></div>
                   <span className="text-black">Heather</span>
                 </div>
               </td>
@@ -145,18 +134,15 @@ const ContactTable = () => {
                 </a>
               </td>
             </tr>
-            <tr className="bg-white border-b text-black lg:hidden">
+            <tr className="bg-white border-b text-black lg:hidden ">
               <td
                 scope="row"
                 colSpan={4}
-                className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap "
+                className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap w-full"
               >
                 <div className="flex items-center   gap-3">
-                  <img
-                    className="w-10 h-10 object-cover rounded-full"
-                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
-                    alt=""
-                  />
+                <div className="text-white bg-primary p-2 rounded-full"><BsFillPersonFill className="text-2xl"/></div>
+
                   <span className="text-black">Heather</span>
                 </div>
               </td>
@@ -164,7 +150,7 @@ const ContactTable = () => {
             </tr>
             {clicked && (
               <tr className="relative">
-                <td colSpan="3" className="px-6 py-4">
+                <td colSpan="5" className="px-6 py-4">
                   <div className="absolute top-[-20px] right-0">
                     <table className="bg-white border border-gray-200 flex flex-col gap-1 cursor-pointer">
                       <tbody>

@@ -10,7 +10,7 @@ const Sidebar = () => {
     <div>
       <aside
         // id="default-sidebar"
-        className="fixed top-0 left-0 z-40 w-64 h-screen  -translate-x-full sm:translate-x-0 "
+        className="fixed top-0 left-0 z-40 w-64 h-screen  -translate-x-full md:translate-x-0 "
         aria-label="Sidebar"
       >
         <div className="h-full rounded-r-xl px-3 py-4 overflow-y-auto bg-primary dark:bg-gray-800 mt-16 text-white">
@@ -54,7 +54,7 @@ const Sidebar = () => {
           </ul>
         </div>
       </aside>
-      <div className="px-4 sm:ml-64">
+      <div className="px-4 ml-0 md:ml-64">
         <ContactTable />
       </div>
     </div>
