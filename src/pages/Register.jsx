@@ -29,7 +29,7 @@ const Register = () => {
       </div>
       <div className="md:w-1/3 px-4 md:px-0 max-w-sm">
         <form action="" onSubmit={registerHandler}>
-          <h1 className="font-bold text-xl text-slate-700">GET'S STARTED</h1>
+          <h1 className="font-bold text-xl text-slate-700">LET&apos;S GET STARTED</h1>
 
           <div>
             <input
@@ -69,7 +69,7 @@ const Register = () => {
           </div>
 
           <div className="mt-4  font-semibold text-sm text-slate-500 text-center ">
-            Don't have an account?
+            Already have an account?
             <Link to={"/login"}>
               <span
                 className="text-primary hover:underline hover:underline-offset-4"

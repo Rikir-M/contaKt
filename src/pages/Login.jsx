@@ -15,8 +15,8 @@ const Login = () => {
   const loginHandler = async (e) => {
     e.preventDefault();
     const user = { email, password };
-    const { data } = await login(user);
-    console.log(data)
+    const { data , isLoading} = await login(user);
+    console.log(data,isLoading)
     dispatch(
       addUser({
         user: data?.user,
@@ -59,7 +59,7 @@ const Login = () => {
           </div>
 
           <h1 className="mt-4  font-semibold text-sm text-slate-500 text-center ">
-            Already have an account?
+            Don&apos; have an account?
             <Link to={"/register"}>
               <span
                 className="text-primary hover:underline hover:underline-offset-4"

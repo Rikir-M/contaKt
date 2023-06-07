@@ -24,7 +24,7 @@ const Sidebar = () => {
             <li onClick={() => nav('/create')}>
               <a
                 href="#"
-                className="flex items-center p-2  rounded-lg dark:text-white transition-all duration-200 hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700"
+                className="flex items-center p-2  rounded-lg dark:text-white transition-all duration-200 hover:text-primary hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 <span className="flex items-center gap-4 ml-3 whitespace-nowrap">
                   <FiPlus />
@@ -32,7 +32,7 @@ const Sidebar = () => {
                 </span>
               </a>
             </li>
-            <li onClick={() => nav('/')} className="hover:text-black transition-all duration-200 ">
+            <li onClick={() => nav('/')} className="hover:text-primary transition-all duration-200 ">
               <a
                 href="#"
                 className="flex items-center p-2  rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
@@ -49,7 +49,7 @@ const Sidebar = () => {
             <li onClick={() => nav('/favorite')}>
               <a
                 href="#"
-                className="flex items-center p-2  rounded-lg dark:text-white hover:text-black transition-all duration-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                className="flex items-center p-2  rounded-lg dark:text-white hover:text-primary transition-all duration-200 hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 <span className="flex items-center gap-4 ml-3 whitespace-nowrap">
                   <AiOutlineHeart />

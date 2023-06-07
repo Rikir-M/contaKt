@@ -8,13 +8,18 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchTerm } from "../features/services/contactSlice";
+import { useGetContactsQuery } from "../features/api/contactApi";
+import Cookies from "js-cookie";
 
 const Navbar = () => {
   const nav = useNavigate()
+  const token = Cookies.get('token')
   const [show,setShow] = useState(false)
   const [drop,setDrop] = useState(false)
   const dispatch = useDispatch()
   const searchTerm = useSelector((state) => state.contactSlice.searchTerm);
+  const {data} = useGetContactsQuery(token)
+  console.log(data)
   return (
     <div>
       <nav className="bg-gray-200 border-gray-200 dark:bg-gray-900">
@@ -44,7 +49,7 @@ const Navbar = () => {
               <input
                 type="text"
                 id="search-navbar"
-                className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary focus:border-primary dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
                 placeholder="Search..."
                 value={searchTerm} onChange={(e)=>dispatch(setSearchTerm(e.target.value))}
               />
@@ -53,7 +58,7 @@ const Navbar = () => {
               // data-collapse-toggle="navbar-search"
               onClick={() => setShow(!show)}
               type="button"
-              className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              className="inline-flex items-center p-2 text-sm text-gray-400 rounded-lg md:hidden hover:text-primary  dark:text-gray-400"
               // aria-controls="navbar-search"
               // aria-expanded="false"
             >
@@ -78,7 +83,7 @@ const Navbar = () => {
               // id="dropdownDefaultButton"
               className="text-center inline-flex items-center "
             >
-              <CgProfile className="text-3xl text-black opacity-50" />
+              <CgProfile className="text-3xl text-gray-400 hover:text-primary" />
             </button>
             <div className="">
             <div
@@ -96,7 +101,7 @@ const Navbar = () => {
                 className="flex flex-col text-sm text-gray-700 dark:text-gray-200 cursor-pointer"
                 // aria-labelledby="dropdownDefaultButton"
               >
-                <li className="flex items-center gap-3 px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                <li className="flex items-center gap-3 px-4 py-2 hover:bg-primary rounded-t-lg hover:text-white">
                   <div className=" text-black opacity-50 text-3xl">
                     <CgProfile />
                   </div>
@@ -106,7 +111,7 @@ const Navbar = () => {
                   </div>
                 </li>
                 <hr />
-                <li onClick={() => dispatch()} className="text-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                <li onClick={() => dispatch()} className="text-center px-4 py-2 hover:bg-primary rounded-t-lg hover:text-white">
                   <p className="flex items-center  gap-4  font-bold">
                     {" "}
                     <LuLogOut className=" text-black opacity-50 text-2xl" />
