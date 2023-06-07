@@ -6,6 +6,8 @@ import Loading from './pages/Loading'
 import Favorite from './pages/Favorite'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import CreateContact from './pages/CreateContact'
+import EditContact from './pages/EditContact'
 
 const App = () => {
   return (
@@ -16,6 +18,8 @@ const App = () => {
         <Route path='/favorite' element={<Favorite/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
+        <Route path='/create' element={<CreateContact/>}/>
+        <Route path='/edit/:id' element={<EditContact/>}/>
       </Routes>
       </div>
   )

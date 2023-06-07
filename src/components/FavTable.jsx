@@ -93,11 +93,11 @@ const FavTable = () => {
       ) : (
         <div className="flex  justify-center">
         <div className="bg-primary p-8 text-center rounded flex flex-col gap-5">
-        <div className="text-4xl">
+        <div className="text-4xl text-white">
             There is no Fav
           </div>
 
-          <p onClick={() => nav('/')} className="bg-white  border-2 text-primary cursor-pointer border-primary px-2 py-1 rounded inline-block">
+          <p onClick={() => nav('/')} className="bg-white  border-2 text-primary cursor-pointer border-primary hover:bg-primary hover:text-white hover:border-white px-2 py-1 rounded inline-block">
             Go To Contact
           </p>
         </div>

@@ -96,10 +96,10 @@ const ContactTable = () => {
                         <span className="text-black">{contact?.name}</span>
                       </div>
                     </td>
-                    <td className="px-6 py-4 ">{contact?.gmail}</td>
+                    <td className="px-6 py-4">{contact?.gmail}</td>
                     <td className="px-6 py-4">{contact?.phone}</td>
                     <td className="px-6 py-4">{contact?.address}</td>
-                    <td className="px-6 py-4 ">
+                    <td className="px-6 py-4">
                       <a
                         href="#"
                         onClick={() => clickHandler(contact?.id)}
@@ -126,13 +126,13 @@ const ContactTable = () => {
                   </tr>
                   {clicked === contact?.id && (
                     <tr className="relative" key={contact?.id}>
-                      <td colSpan="5" className="px-6 py-4">
+                      <td colSpan="5" className=" p-0">
                         <div className="absolute top-[-20px] right-0">
                           <table className="bg-white border border-gray-200 flex flex-col gap-1 cursor-pointer">
                             <tbody>
                               <tr
                                 onClick={() => favHandler(contact)}
-                                className="flex items-center gap-3 hover:bg-gray-100 px-3 py-2"
+                                className="flex items-center gap-3 hover:bg-primary hover:text-white px-3 py-2"
                               >
                                 <td>
                                   <RiUserHeartLine className="text-2xl" />
@@ -142,8 +142,8 @@ const ContactTable = () => {
                                 </td>
                               </tr>
                               <tr
-                                onClick={() => nav("/edit")}
-                                className="flex items-center gap-3 hover:bg-gray-100 px-3 py-2"
+                                onClick={() => nav(`/edit/${contact.id}`)}
+                                className="flex items-center gap-3 hover:bg-primary hover:text-white px-3 py-2"
                               >
                                 <td>
                                   <BiPencil className="text-2xl" />
@@ -159,7 +159,7 @@ const ContactTable = () => {
                                     token,
                                   })
                                 }
-                                className="flex items-center gap-3 hover:bg-gray-100 px-3 py-2"
+                                className="flex items-center gap-3 hover:bg-primary hover:text-white px-3 py-2"
                               >
                                 <td>
                                   <LuTrash className="text-2xl" />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import { LuLogOut } from "react-icons/lu";
 import { FcBusinessContact } from "react-icons/fc";
@@ -101,7 +101,7 @@ const Navbar = () => {
                 className="flex flex-col text-sm text-gray-700 dark:text-gray-200 cursor-pointer"
                 // aria-labelledby="dropdownDefaultButton"
               >
-                <li className="flex items-center gap-3 px-4 py-2 hover:bg-primary rounded-t-lg hover:text-white">
+                {/* <li className="flex items-center gap-3 px-4 py-2 hover:bg-primary rounded-t-lg hover:text-white">
                   <div className=" text-black opacity-50 text-3xl">
                     <CgProfile />
                   </div>
@@ -110,11 +110,11 @@ const Navbar = () => {
                     <p>gmail@gmail.com</p>
                   </div>
                 </li>
-                <hr />
-                <li onClick={() => dispatch()} className="text-center px-4 py-2 hover:bg-primary rounded-t-lg hover:text-white">
+                <hr /> */}
+                <li onClick={() => dispatch()} className="text-center px-4 py-2 hover:bg-primary rounded-lg hover:text-white">
                   <p className="flex items-center  gap-4  font-bold">
                     {" "}
-                    <LuLogOut className=" text-black opacity-50 text-2xl" />
+                    <LuLogOut className="  text-2xl" />
                     Log Out
                   </p>
                 </li>

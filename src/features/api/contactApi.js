@@ -23,7 +23,6 @@ export const contactApi = createApi({
       invalidatesTags: ["contact"],
     }),
 
-    // delete step1 go to contact table
     deleteContact: builder.mutation({
       query: ({ token, id }) => ({
         url: `/contact/${id}`,
@@ -33,14 +32,22 @@ export const contactApi = createApi({
       invalidatesTags: ["contact"],
     }),
 
-    updateContact: builder.mutation({
-      query: ({ token, newDta }) => ({
-        url: `/contact/${newDta.id}`,
-        method: "PATCH",
-        body: newDta,
+    singleContact : builder.query({
+      query : ({token,id}) => ({
+        url : `/contact/${id}`,
         headers: { authorization: `Bearer ${token}` },
       }),
-      invalidatesTags: ["blogApi"],
+      providesTags : ['contact']
+    }),
+
+    updateContact: builder.mutation({
+      query: ({token,newData }) => ({
+        url: `/contact/${newData.id}`,
+        method: "PUT",
+        body: newData,
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      invalidatesTags: ["contact"],
     }),
   }),
 });
@@ -49,5 +56,6 @@ export const {
   useGetContactsQuery,
   useCreateContactMutation,
   useDeleteContactMutation,
+  useSingleContactQuery,
   useUpdateContactMutation,
 } = contactApi;

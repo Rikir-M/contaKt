@@ -10,8 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.0",
+    "@emotion/react": "^11.11.1",
     "@mantine/core": "^6.0.13",
+    "@mantine/form": "^6.0.13",
     "@mantine/hooks": "^6.0.13",
     "@reduxjs/toolkit": "^1.9.5",
     "flowbite": "^1.6.5",
