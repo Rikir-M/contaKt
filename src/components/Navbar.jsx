@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import { LuLogOut } from "react-icons/lu";
 import { FcBusinessContact } from "react-icons/fc";
@@ -6,9 +6,15 @@ import { FiPlus } from "react-icons/fi";
 import { RiContactsLine } from "react-icons/ri";
 import { AiOutlineHeart } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setSearchTerm } from "../features/services/contactSlice";
 
 const Navbar = () => {
   const nav = useNavigate()
+  const [show,setShow] = useState(false)
+  const [drop,setDrop] = useState(false)
+  const dispatch = useDispatch()
+  const searchTerm = useSelector((state) => state.contactSlice.searchTerm);
   return (
     <div>
       <nav className="bg-gray-200 border-gray-200 dark:bg-gray-900">
@@ -40,14 +46,16 @@ const Navbar = () => {
                 id="search-navbar"
                 className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Search..."
+                value={searchTerm} onChange={(e)=>dispatch(setSearchTerm(e.target.value))}
               />
             </div>
             <button
-              data-collapse-toggle="navbar-search"
+              // data-collapse-toggle="navbar-search"
+              onClick={() => setShow(!show)}
               type="button"
               className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-              aria-controls="navbar-search"
-              aria-expanded="false"
+              // aria-controls="navbar-search"
+              // aria-expanded="false"
             >
               <span className="sr-only">Open menu</span>
               <svg
@@ -65,19 +73,28 @@ const Navbar = () => {
               </svg>
             </button>
             <button
-              data-dropdown-toggle="dropdown"
-              id="dropdownDefaultButton"
-              className="text-center inline-flex items-center"
+              onClick={() => setDrop(!drop)}
+              // data-dropdown-toggle='dropdown'
+              // id="dropdownDefaultButton"
+              className="text-center inline-flex items-center "
             >
               <CgProfile className="text-3xl text-black opacity-50" />
             </button>
+            <div className="">
             <div
-              id="dropdown"
-              className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+              // id="dropdown"
+              // style={{
+              //   position: 'absolute',
+              //   inset: '0px auto auto 0px',
+              //   margin: '0px',
+              //   transform: 'translate3d(359.333px, 61px, 0px)'
+              // }}
+              // data-popper-placement="bottom"
+              className={`${drop ? 'fixed top-14 right-5' : 'hidden'} z-10  bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
             >
               <ul
                 className="flex flex-col text-sm text-gray-700 dark:text-gray-200 cursor-pointer"
-                aria-labelledby="dropdownDefaultButton"
+                // aria-labelledby="dropdownDefaultButton"
               >
                 <li className="flex items-center gap-3 px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                   <div className=" text-black opacity-50 text-3xl">
@@ -89,7 +106,7 @@ const Navbar = () => {
                   </div>
                 </li>
                 <hr />
-                <li className="text-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                <li onClick={() => dispatch()} className="text-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                   <p className="flex items-center  gap-4  font-bold">
                     {" "}
                     <LuLogOut className=" text-black opacity-50 text-2xl" />
@@ -98,12 +115,13 @@ const Navbar = () => {
                 </li>
               </ul>
             </div>
+            </div>
           </div>
           <div
-            className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
-            id="navbar-search"
+            className={`items-center justify-between  w-full md:flex md:w-auto md:order-1 ${show ? 'null' : 'hidden'}`}
+            // id="navbar-search"
           >
-            <div className="relative mt-3 md:hidden">
+         <div className="relative mt-3 md:hidden">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg
                   className="w-5 h-5 text-gray-500"

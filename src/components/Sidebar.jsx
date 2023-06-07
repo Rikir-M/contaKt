@@ -5,8 +5,12 @@ import { RiContactsLine } from "react-icons/ri";
 import { AiOutlineHeart } from "react-icons/ai";
 import ContactTable from "./ContactTable";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
+import { useGetContactsQuery } from "../features/api/contactApi";
 
 const Sidebar = () => {
+  const token = Cookies.get('token')
+  const { data } = useGetContactsQuery(token);
   const nav = useNavigate()
   return (
     <div>
@@ -38,7 +42,7 @@ const Sidebar = () => {
                   My Contacts
                 </span>
                 <div className="ml-12 inline-flex items-center justify-center w-3 h-3 p-3  text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
-                  3
+                  {data?.contacts?.data?.length}
                 </div>
               </a>
             </li>

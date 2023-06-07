@@ -4,6 +4,8 @@ import Dashboard from './pages/Dashboard'
 import NotFound from './pages/NotFound'
 import Loading from './pages/Loading'
 import Favorite from './pages/Favorite'
+import Login from './pages/Login'
+import Register from './pages/Register'
 
 const App = () => {
   return (
@@ -12,6 +14,8 @@ const App = () => {
         <Route path='/' element={<Dashboard/>}/>
         <Route path='*' element={<NotFound/>}/>
         <Route path='/favorite' element={<Favorite/>}/>
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/register' element={<Register/>}/>
       </Routes>
       </div>
   )

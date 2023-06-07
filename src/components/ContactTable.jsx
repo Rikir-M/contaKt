@@ -1,17 +1,51 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { BiPencil } from "react-icons/bi";
 import { LuTrash } from "react-icons/lu";
 import { RiUserHeartLine } from "react-icons/ri";
-import {BsFillPersonFill} from 'react-icons/bs'
+import { BsFillPersonFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import {
+  useDeleteContactMutation,
+  useGetContactsQuery,
+} from "../features/api/contactApi";
+import Cookies from "js-cookie";
+import { useDispatch, useSelector } from "react-redux";
+import { addContacts } from "../features/services/contactSlice";
+import { addToFav } from "../features/services/favSlice";
 
 const ContactTable = () => {
-  const [clicked, setClicked] = useState(false);
-  const nav = useNavigate()
-  const clickHandler = () => {
-    setClicked(!clicked);
+  const token = Cookies.get("token");
+
+  const [clicked, setClicked] = useState(null);
+  const nav = useNavigate();
+  const clickHandler = (id) => {
+    if (clicked === id) {
+      setClicked(null); // Toggle off if clicked again
+    } else {
+      setClicked(id);
+    }
   };
+
+  const favHandler = (contact) => {
+    console.log(contact);
+    setClicked(null);
+    dispatch(addToFav(contact));
+  };
+
+  const [deleteContact] = useDeleteContactMutation();
+  const deleteHandler = async () => {
+    const deleteData = await deleteContact();
+  };
+  const { data } = useGetContactsQuery(token);
+
+  const dispatch = useDispatch();
+  const contacts = useSelector((state) => state?.contactSlice?.contacts);
+  const searchTerm = useSelector((state) => state?.contactSlice?.searchTerm);
+  useEffect(() => {
+    dispatch(addContacts(data?.contacts?.data));
+  }, [data]);
+
   return (
     <div>
       <div className=" overflow-x-hidden md:overflow-x-visible  sm:rounded-lg ">
@@ -28,165 +62,121 @@ const ContactTable = () => {
                 Phone Number
               </th>
               <th scope="col" className="px-6 py-3">
-                Created Date
+                Address
               </th>
               <th scope="col" className="px-6 py-3">
                 Actions
               </th>
             </tr>
           </thead>
-          <tbody className="">
-            <tr className="bg-white border-b text-black hidden lg:table-row ">
-              <td
-                scope="row"
-                className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap "
-              >
-                <div className="flex items-center  gap-3">
-                  <div className="text-white bg-primary p-2 rounded-full"><BsFillPersonFill className="text-2xl"/></div>
-                  <span className="text-black">Heather</span>
-                </div>
-              </td>
-              <td className="px-6 py-4 ">
-                heather@gmail.com
-              </td>
-              <td className="px-6 py-4">09100200300</td>
-              <td className="px-6 py-4">August 31 2021</td>
-              <td className="px-6 py-4 ">
-                <a
-                  href="#"
-                  onClick={clickHandler}
-                  className="font-medium text-black hover:underline"
-                >
-                  <HiOutlineDotsHorizontal />
-                </a>
-              </td>
-            </tr>
-            <tr className="bg-white border-b text-black lg:hidden ">
-              <td
-                scope="row"
-                colSpan={4}
-                className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap w-full"
-              >
-                <div className="flex items-center   gap-3">
-                <div className="text-white bg-primary p-2 rounded-full"><BsFillPersonFill className="text-2xl"/></div>
+          {data?.contacts?.data
+            .filter((item) => {
+              if (searchTerm === "") {
+                return item;
+              } else if (
+                item?.name
+                  .toLowerCase()
+                  .includes(searchTerm?.toLocaleLowerCase())
+              ) {
+                return item;
+              }
+            })
+            ?.map((contact) => {
+              return (
+                <tbody className="" key={contact.id}>
+                  <tr className="bg-white border-b text-black hidden lg:table-row ">
+                    <td
+                      scope="row"
+                      className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap "
+                    >
+                      <div className="flex items-center  gap-3">
+                        <div className="text-white bg-primary p-2 rounded-full">
+                          <BsFillPersonFill className="text-2xl" />
+                        </div>
+                        <span className="text-black">{contact?.name}</span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 ">{contact?.gmail}</td>
+                    <td className="px-6 py-4">{contact?.phone}</td>
+                    <td className="px-6 py-4">{contact?.address}</td>
+                    <td className="px-6 py-4 ">
+                      <a
+                        href="#"
+                        onClick={() => clickHandler(contact?.id)}
+                        className="font-medium text-black hover:underline"
+                      >
+                        <HiOutlineDotsHorizontal />
+                      </a>
+                    </td>
+                  </tr>
+                  <tr className="bg-white border-b text-black lg:hidden ">
+                    <td
+                      scope="row"
+                      colSpan={4}
+                      className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap w-full"
+                    >
+                      <div className="flex items-center   gap-3">
+                        <div className="text-white bg-primary p-2 rounded-full">
+                          <BsFillPersonFill className="text-2xl" />
+                        </div>
 
-                  <span className="text-black">Heather</span>
-                </div>
-              </td>
-      
-            </tr>
-            {clicked && (
-              <tr className="relative">
-                <td colSpan="5" className="px-6 py-4">
-                  <div className="absolute top-[-20px] right-0">
-                    <table className="bg-white border border-gray-200 flex flex-col gap-1 cursor-pointer">
-                      <tbody>
-                        <tr className="flex items-center gap-3 hover:bg-gray-100 px-3 py-2">
-                          <td>
-                            <RiUserHeartLine className="text-2xl" />
-                          </td>
-                          <td>
-                            <p>Add to Favorite</p>
-                          </td>
-                        </tr>
-                        <tr onClick={() => nav('/edit')} className="flex items-center gap-3 hover:bg-gray-100 px-3 py-2">
-                          <td>
-                            <BiPencil className="text-2xl" />
-                          </td>
-                          <td>
-                            <p>Edit</p>
-                          </td>
-                        </tr>
-                        <tr className="flex items-center gap-3 hover:bg-gray-100 px-3 py-2">
-                          <td>
-                            <LuTrash className="text-2xl" />
-                          </td>
-                          <td>
-                            <p>Delete</p>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </td>
-              </tr>
-            )}
-          <tr className="bg-white border-b text-black hidden lg:table-row ">
-              <td
-                scope="row"
-                className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap "
-              >
-                <div className="flex items-center  gap-3">
-                  <div className="text-white bg-primary p-2 rounded-full"><BsFillPersonFill className="text-2xl"/></div>
-                  <span className="text-black">Heather</span>
-                </div>
-              </td>
-              <td className="px-6 py-4 ">
-                heather@gmail.com
-              </td>
-              <td className="px-6 py-4">09100200300</td>
-              <td className="px-6 py-4">August 31 2021</td>
-              <td className="px-6 py-4 ">
-                <a
-                  href="#"
-                  onClick={clickHandler}
-                  className="font-medium text-black hover:underline"
-                >
-                  <HiOutlineDotsHorizontal />
-                </a>
-              </td>
-            </tr>
-            <tr className="bg-white border-b text-black lg:hidden ">
-              <td
-                scope="row"
-                colSpan={4}
-                className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap w-full"
-              >
-                <div className="flex items-center   gap-3">
-                <div className="text-white bg-primary p-2 rounded-full"><BsFillPersonFill className="text-2xl"/></div>
-
-                  <span className="text-black">Heather</span>
-                </div>
-              </td>
-      
-            </tr>
-            {clicked && (
-              <tr className="relative">
-                <td colSpan="5" className="px-6 py-4">
-                  <div className="absolute top-[-20px] right-0">
-                    <table className="bg-white border border-gray-200 flex flex-col gap-1 cursor-pointer">
-                      <tbody>
-                        <tr className="flex items-center gap-3 hover:bg-gray-100 px-3 py-2">
-                          <td>
-                            <RiUserHeartLine className="text-2xl" />
-                          </td>
-                          <td>
-                            <p>Add to Favorite</p>
-                          </td>
-                        </tr>
-                        <tr className="flex items-center gap-3 hover:bg-gray-100 px-3 py-2">
-                          <td>
-                            <BiPencil className="text-2xl" />
-                          </td>
-                          <td>
-                            <p>Edit</p>
-                          </td>
-                        </tr>
-                        <tr className="flex items-center gap-3 hover:bg-gray-100 px-3 py-2">
-                          <td>
-                            <LuTrash className="text-2xl" />
-                          </td>
-                          <td>
-                            <p>Delete</p>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </td>
-              </tr>
-            )}
-          </tbody>
+                        <span className="text-black">{contact?.name}</span>
+                      </div>
+                    </td>
+                  </tr>
+                  {clicked === contact?.id && (
+                    <tr className="relative" key={contact?.id}>
+                      <td colSpan="5" className="px-6 py-4">
+                        <div className="absolute top-[-20px] right-0">
+                          <table className="bg-white border border-gray-200 flex flex-col gap-1 cursor-pointer">
+                            <tbody>
+                              <tr
+                                onClick={() => favHandler(contact)}
+                                className="flex items-center gap-3 hover:bg-gray-100 px-3 py-2"
+                              >
+                                <td>
+                                  <RiUserHeartLine className="text-2xl" />
+                                </td>
+                                <td>
+                                  <p>Add to Favorite</p>
+                                </td>
+                              </tr>
+                              <tr
+                                onClick={() => nav("/edit")}
+                                className="flex items-center gap-3 hover:bg-gray-100 px-3 py-2"
+                              >
+                                <td>
+                                  <BiPencil className="text-2xl" />
+                                </td>
+                                <td>
+                                  <p>Edit</p>
+                                </td>
+                              </tr>
+                              <tr
+                                onClick={async () =>
+                                  await deleteContact({
+                                    id: contact?.id,
+                                    token,
+                                  })
+                                }
+                                className="flex items-center gap-3 hover:bg-gray-100 px-3 py-2"
+                              >
+                                <td>
+                                  <LuTrash className="text-2xl" />
+                                </td>
+                                <td>
+                                  <p>Delete</p>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              );
+            })}
         </table>
       </div>
     </div>
