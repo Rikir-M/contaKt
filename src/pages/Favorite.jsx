@@ -9,7 +9,7 @@ const Favorite = () => {
     <div>
         <Navbar/>
         <Sidebar />
-      <div className="px-4 ml-0 md:ml-64">
+      <div className="px-4 ml-0 md:ml-64 mt-16">
         <FavTable />
       </div>
     </div>

@@ -72,7 +72,7 @@ const Login = () => {
           </h1>
           <div className="text-center md:text-left">
             <button
-              className="mt-4 w-full bg-primary hover:bg-blue-700 px-6 py-2 text-white uppercase rounded text-xs float-right  tracking-wider"
+              className="mt-4 w-full bg-primary hover:bg-transparent border-2 border-primary hover:text-primary px-6 py-2 text-white uppercase rounded text-xs float-right  tracking-wider"
               type="submit"
             >
               Login

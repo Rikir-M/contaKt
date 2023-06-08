@@ -118,7 +118,7 @@ const EditContact = () => {
               onClick={() => nav("/")}
               className=" border bg-primary text-white rounded-lg hover:text-primary dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 py-2 px-3"
             >
-              Cancle
+              Cancel
             </button>
             <button
               className=" border bg-primary text-white rounded-lg hover:text-primary dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 py-2 px-3"
