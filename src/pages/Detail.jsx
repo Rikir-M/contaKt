@@ -250,7 +250,7 @@ const Detail = () => {
         </div>
       </aside> */}
       {/* <Sidebar/> */}
-      <div className="flex    lg:hidden  justify-center mt-16">
+      <div className="flex    lg:hidden  justify-center mt-20">
         <div className="">
           <div className="bg-primary  mx-auto mb-5 w-24 h-24 flex text-center justify-center items-center rounded-full">
             <BsPerson className="text-6xl text-white" />
@@ -333,7 +333,7 @@ const Detail = () => {
             </div>
           </div>
           <Link to={"/"}>
-            <button className="bg-primary flex items-center gap-3 rounded-lg text-white px-5 py-2">
+            <button className="bg-primary flex items-center gap-3 rounded-lg text-white px-5 py-2 mx-auto">
               <AiTwotoneHome />
               Back to Home
             </button>
