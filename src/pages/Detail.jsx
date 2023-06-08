@@ -250,7 +250,7 @@ const Detail = () => {
         </div>
       </aside> */}
       {/* <Sidebar/> */}
-      <div className="flex    lg:hidden  justify-center mt-14">
+      <div className="flex    lg:hidden  justify-center mt-16">
         <div className="">
           <div className="bg-primary  mx-auto mb-5 w-24 h-24 flex text-center justify-center items-center rounded-full">
             <BsPerson className="text-6xl text-white" />
