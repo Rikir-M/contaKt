@@ -14,19 +14,20 @@ import { useLogoutMutation } from "../features/api/authApi";
 import { removeUser } from "../features/services/authSlice";
 
 const Navbar = () => {
-  const nav = useNavigate()
-  const token = Cookies.get('token')
+  const nav = useNavigate();
+  const token = Cookies.get("token");
+  const user = JSON.parse(Cookies.get('user'))
   // console.log(token);
-  const [show,setShow] = useState(false)
-  const [drop,setDrop] = useState(false)
-  const dispatch = useDispatch()
+  const [show, setShow] = useState(false);
+  const [drop, setDrop] = useState(false);
+  const dispatch = useDispatch();
   const searchTerm = useSelector((state) => state.contactSlice.searchTerm);
-  const {data} = useGetContactsQuery(token)
-  const [logout] = useLogoutMutation()
+  const { data } = useGetContactsQuery(token);
+  const [logout] = useLogoutMutation();
 
   const logoutHandler = async () => {
-    const { data  : lgdata} = await logout(token);
-  console.log(lgdata)
+    const { data: lgdata } = await logout(token);
+    console.log(lgdata);
 
     if (data?.success) {
       dispatch(removeUser());
@@ -64,7 +65,8 @@ const Navbar = () => {
                 id="search-navbar"
                 className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary focus:border-primary dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
                 placeholder="Search..."
-                value={searchTerm} onChange={(e)=>dispatch(setSearchTerm(e.target.value))}
+                value={searchTerm}
+                onChange={(e) => dispatch(setSearchTerm(e.target.value))}
               />
             </div>
             <button
@@ -99,47 +101,54 @@ const Navbar = () => {
               <CgProfile className="text-3xl text-gray-400 hover:text-primary" />
             </button>
             <div className="">
-            <div
-              // id="dropdown"
-              // style={{
-              //   position: 'absolute',
-              //   inset: '0px auto auto 0px',
-              //   margin: '0px',
-              //   transform: 'translate3d(359.333px, 61px, 0px)'
-              // }}
-              // data-popper-placement="bottom"
-              className={`${drop ? 'fixed top-14 right-5' : 'hidden'} z-10  bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
-            >
-              <ul
-                className="flex flex-col text-sm text-gray-700 dark:text-gray-200 cursor-pointer"
-                // aria-labelledby="dropdownDefaultButton"
+              <div
+                // id="dropdown"
+                // style={{
+                //   position: 'absolute',
+                //   inset: '0px auto auto 0px',
+                //   margin: '0px',
+                //   transform: 'translate3d(359.333px, 61px, 0px)'
+                // }}
+                // data-popper-placement="bottom"
+                className={`${
+                  drop ? "fixed top-14 right-5" : "hidden"
+                } z-10  bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
               >
-                {/* <li className="flex items-center gap-3 px-4 py-2 hover:bg-primary rounded-t-lg hover:text-white">
+                <ul
+                  className="flex flex-col text-sm text-gray-700 dark:text-gray-200 cursor-pointer"
+                  // aria-labelledby="dropdownDefaultButton"
+                >
+                  <li className="flex items-center gap-4 px-4 py-2 hover:bg-primary rounded-t-lg hover:text-white">
                   <div className=" text-black opacity-50 text-3xl">
                     <CgProfile />
                   </div>
-                  <div>
-                    <p className="font-bold ">Name</p>
-                    <p>gmail@gmail.com</p>
+                  <div className="overflow-x-clip">
+                    <p className="font-bold ">{user?.name}</p>
+                    <p className="text-xs overflow-hidden overflow-ellipsis">{user?.email}</p>
                   </div>
                 </li>
-                <hr /> */}
-                <li onClick={()=> logoutHandler()} className="text-center px-4 py-2 hover:bg-primary rounded-lg hover:text-white">
-                  <p className="flex items-center  gap-4  font-bold">
-                    {" "}
-                    <LuLogOut className="  text-2xl" />
-                    Log Out
-                  </p>
-                </li>
-              </ul>
-            </div>
+                <hr />
+                  <li
+                    onClick={() => logoutHandler()}
+                    className="text-center  px-4 py-2 hover:bg-primary rounded-lg hover:text-white"
+                  >
+                    <p className="flex items-center  gap-4  font-bold">
+                      {" "}
+                      <LuLogOut className="  text-2xl" />
+                      Log Out
+                    </p>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
           <div
-            className={`items-center justify-between  w-full md:flex md:w-auto md:order-1 ${show ? 'null' : 'hidden'}`}
+            className={`items-center justify-between  w-full md:flex md:w-auto md:order-1 ${
+              show ? "null" : "hidden"
+            }`}
             // id="navbar-search"
           >
-         <div className="relative mt-3 md:hidden">
+            <div className="relative mt-3 md:hidden">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg
                   className="w-5 h-5 text-gray-500"
@@ -163,7 +172,7 @@ const Navbar = () => {
               />
             </div>
             <ul className="flex flex-col overflow-hidden visible md:invisible bg-primary p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-              <li onClick={() => nav('/create')}>
+              <li onClick={() => nav("/create")}>
                 <a
                   href="#"
                   className="block py-2 pl-3 pr-4 text-white hover:text-primary rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
@@ -174,7 +183,7 @@ const Navbar = () => {
                   </span>
                 </a>
               </li>
-              <li onClick={() => nav('/')}>
+              <li onClick={() => nav("/")}>
                 <a
                   href="#"
                   className="flex items-center gap-2 py-2 pl-3 pr-4 text-white hover:text-primary  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
@@ -184,11 +193,12 @@ const Navbar = () => {
                     My Contacts
                   </span>
                   <div className="ml-auto inline-flex items-center justify-center w-3 h-3 p-3  text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
-                    3
+                  {data?.contacts?.data?.length}
+                    
                   </div>
                 </a>
               </li>
-              <li onClick={() => nav('/favorite')}>
+              <li onClick={() => nav("/favorite")}>
                 <a
                   href="#"
                   className="block py-2 pl-3 pr-4 text-white hover:text-primary  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"

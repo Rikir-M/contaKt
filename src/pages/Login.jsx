@@ -9,22 +9,30 @@ import photo from "../assets/image1.jpg";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message,setMessage] = useState('Login')
   const [login] = useLoginMutation();
-  const navigate = useNavigate();
+  const nav = useNavigate();
   const dispatch = useDispatch();
   const loginHandler = async (e) => {
     e.preventDefault();
     const user = { email, password };
-    const { data , isLoading} = await login(user);
-    console.log(data,isLoading)
-    dispatch(
-      addUser({
-        user: data?.user,
-        token: data?.token,
-      })
-    );
+    const {data} = await login(user);
+    console.log(data)
+    if(!data?.success){
+      setMessage(data?.message)
+    }
 
-    if (data?.success) navigate("/");
+
+    if (data?.success){
+      setMessage(data?.message)
+      nav('/')
+      dispatch(
+        addUser({
+          user: data?.user,
+          token: data?.token,
+        })
+      );
+    };
     // console.log(data);
   };
   return (
@@ -75,7 +83,7 @@ const Login = () => {
               className="mt-4 w-full bg-primary hover:bg-transparent border-2 border-primary hover:text-primary px-6 py-2 text-white uppercase rounded text-xs float-right  tracking-wider"
               type="submit"
             >
-              Login
+              {message}
             </button>
           </div>
         </form>

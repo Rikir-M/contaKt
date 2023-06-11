@@ -10,13 +10,17 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirmation, setPasswordComfirmation] = useState("");
+  const [errors, setErrors] = useState([]);
   const [register] = useRegisterMutation();
   const navigate = useNavigate();
   const registerHandler = async (e) => {
     e.preventDefault();
     const user = { name, email, password, password_confirmation };
-    const { data } = await register(user);
-    console.log(data);
+    const { data, error } = await register(user);
+    console.log(error?.data?.errors)
+    if (error?.data) {
+      setErrors(error?.data?.errors);
+    }
     if (data?.success) navigate("/login");
   };
   return (
@@ -29,7 +33,9 @@ const Register = () => {
       </div>
       <div className="md:w-1/3 px-4 md:px-0 max-w-sm">
         <form action="" onSubmit={registerHandler}>
-          <h1 className="font-bold text-xl text-slate-700">LET&apos;S GET STARTED</h1>
+          <h1 className="font-bold text-xl text-slate-700">
+            LET&apos;S GET STARTED
+          </h1>
 
           <div>
             <input
@@ -39,6 +45,7 @@ const Register = () => {
               type="text"
               placeholder="Enter Name"
             />
+            <p className="mb-0 text-sm text-red-500">{errors?.name}</p>
           </div>
           <div>
             <input
@@ -48,6 +55,7 @@ const Register = () => {
               type="email"
               placeholder="Email Address"
             />
+            <p className="mb-0 text-sm text-red-500">{errors?.email}</p>
           </div>
           <div>
             <input
@@ -57,6 +65,7 @@ const Register = () => {
               type="password"
               placeholder="Password"
             />
+            <p className="mb-0 text-sm text-red-500">{errors?.password?.filter(e => !(e.match('confirmation')))}</p>
           </div>
           <div>
             <input
@@ -66,6 +75,7 @@ const Register = () => {
               type="password"
               placeholder="Password Comfirmation"
             />
+            <p className="mb-0 text-sm text-red-500">{errors?.password?.filter(e => (e.match('confirmation')))}</p>
           </div>
 
           <div className="mt-4  font-semibold text-sm text-slate-500 text-center ">
