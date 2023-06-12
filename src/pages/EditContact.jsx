@@ -40,7 +40,7 @@ const EditContact = () => {
     <div className="">
       <Navbar />
       <Sidebar />
-      <div className=" max-w-md mx-auto min-h-screen flex justify-center items-center -mt-14">
+      <div className=" max-w-md mx-auto min-h-screen flex justify-center items-center mt-14">
         <form
           onSubmit={submitHandler}
           className="w-full bg-primary p-5 shadow-md rounded"
